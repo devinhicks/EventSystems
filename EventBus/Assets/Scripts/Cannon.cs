@@ -7,6 +7,8 @@ public class Cannon : MonoBehaviour
     private bool m_IsQuitting;
     GameObject cannonBall;
 
+    public float firingVelocity = 2500f;
+
     public void OnEnable()
     {
         EventBus.StartListening("Shoot", Shoot);
@@ -28,11 +30,12 @@ public class Cannon : MonoBehaviour
     void Shoot()
     {
         // Load and fire cannonball in direction cannon is facing
-        cannonBall = Resources.Load<GameObject>("cannonBall");
-        Instantiate(cannonBall, this.transform.position, this.transform.rotation);
+        cannonBall = (GameObject)Instantiate(Resources.Load("cannonBall"),
+            this.transform.position, this.transform.rotation);
         Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
-        rb.AddExplosionForce(100f, this.transform.forward, 50f);
+        rb.velocity = (this.transform.forward * firingVelocity * Time.deltaTime);
 
+        Debug.Log(rb.velocity);
         Debug.Log("Received a shoot event : shooting cannon!");
     }
 }

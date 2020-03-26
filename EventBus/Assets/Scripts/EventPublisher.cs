@@ -9,7 +9,7 @@ public class EventPublisher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            EventBus.TriggerEvent("Shoot");
+            EventBus.AddToQueue("Shoot");
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -19,7 +19,7 @@ public class EventPublisher : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            EventBus.TriggerEvent("Illuminate");
+            EventBus.AddToQueue("Illuminate");
         }
 
         if (Input.GetKey(KeyCode.J))
